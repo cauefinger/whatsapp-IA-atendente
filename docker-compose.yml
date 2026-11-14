@@ -34,7 +34,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: atendente-redis
-    restart: unless-stopped
+    restart:  unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     ports:
       - "6379:6379"
