@@ -1,25 +1,33 @@
 from fastapi import APIRouter
 from app.db import engine
 from sqlalchemy import text
-from app.cache import redis_client 
+from app.db import redis_client 
+from fastapi.responses import JSONResponse
 
 health = APIRouter()
 
 @health.get("/health")
+def health_check():
+    postgres_status = "ok"
 
-postgres_status = "ok"
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
 
-try:
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
+    except Exception as e:
+        postgres_status = str(e)
 
-except Exception as e:
-    postgres_status = str(e)
+    redis_status = "ok"
 
-redis_status = "ok"
+    try:
+        redis_client.ping()
 
-try:
-    redis_client.ping()
-    
-except Exception as e:
-    redis_status = str(e)
+    except Exception as e:
+        redis_status = str(e)
+
+    resultado = {"postgres": postgres_status, "redis": redis_status}
+
+    if postgres_status == "ok" and redis_status == "ok":
+        return JSONResponse(content=resultado, status_code=200)
+
+    return JSONResponse(content=resultado, status_code=503)
