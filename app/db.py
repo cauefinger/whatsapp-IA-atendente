@@ -2,6 +2,6 @@ from app.core.config import settings
 from sqlalchemy import create_engine
 from redis import Redis
 
-engine = create_engine(settings.database_url)
+engine = create_engine(settings.database_url) # engine e database_url = postgres
 
-redis_client = Redis.from_url(settings.redis_url)
+redis_client = Redis.from_url(settings.redis_url) # redis_client e redis_url = redis
