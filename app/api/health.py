@@ -3,9 +3,9 @@ from app.db import engine, redis_client
 from sqlalchemy import text
 from fastapi.responses import JSONResponse
 
-health = APIRouter()
+router = APIRouter()
 
-@health.get("/health")
+@router.get("/health")
 def health_check():
     postgres_status = "ok"
 
