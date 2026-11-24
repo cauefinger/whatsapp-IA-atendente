@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from app.db import engine
+from app.db import engine, redis_client
 from sqlalchemy import text
-from app.db import redis_client 
 from fastapi.responses import JSONResponse
 
 health = APIRouter()
