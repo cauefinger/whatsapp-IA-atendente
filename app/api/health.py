@@ -3,6 +3,9 @@ from app.db import engine, redis_client
 from sqlalchemy import text
 from fastapi.responses import JSONResponse
 
+
+# navegador → localhost:8000 (PC) → Docker → container api:8000 → uvicorn
+
 router = APIRouter()
 
 @router.get("/health")
