@@ -3,5 +3,5 @@
 # 2. [OK]
 # 3. [OK]
 # 4. [OK]
-# 5. Renomear o router de "health" para "router" no health.py e ajustar o main.py.
+# 5. [OK]
 # 6. Mover o redis_client do db.py para um arquivo próprio, app/cache.py.
